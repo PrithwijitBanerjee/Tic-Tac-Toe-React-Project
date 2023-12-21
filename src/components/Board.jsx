@@ -1,22 +1,47 @@
+import { useState } from "react"
 import Square from "./Square"
 const Board = () => {
+    const [squareArr, setSquareArr] = useState(Array(9).fill(null));
+    const [isNextX,setIsNextX] = useState(true);
+    const handleSquareChange = squarePosition => {
+        if(squareArr[squarePosition])
+        {
+            return;
+        }
+        setSquareArr(prevSquareArr => {
+            return prevSquareArr.map((index, position) => {
+                if (position === squarePosition) {
+                    return isNextX?'X':'O';
+                }
+                return index;
+            })
+        })
+
+        setIsNextX(prevNextX=> !prevNextX);
+    }
+    const RenderSquare = ({ pos }) => { // Nested Component...
+        return <>
+            <Square value={squareArr[pos]} onSquareClick={() => handleSquareChange(pos)} />
+        </>
+    }
     return (
         <>
             <div className="board">
                 <div className="board-row">
-                    <Square value={0}/>
-                    <Square value={1}/>
-                    <Square value={2}/>
+                    <RenderSquare pos={0} />
+                    <RenderSquare pos={1} />
+                    <RenderSquare pos={2} />
+
                 </div>
                 <div className="board-row">
-                    <Square value={3}/>
-                    <Square value={4}/>
-                    <Square value={5}/>
+                    <RenderSquare pos={3} />
+                    <RenderSquare pos={4} />
+                    <RenderSquare pos={5} />
                 </div>
                 <div className="board-row">
-                    <Square value={6}/>
-                    <Square value={7}/>
-                    <Square value={8}/>
+                    <RenderSquare pos={6} />
+                    <RenderSquare pos={7} />
+                    <RenderSquare pos={8} />
                 </div>
             </div>
         </>
