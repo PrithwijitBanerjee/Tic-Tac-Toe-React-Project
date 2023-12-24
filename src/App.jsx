@@ -22,7 +22,7 @@ function App() {
   // const [squareArr, setSquareArr] = useState(Array(9).fill(null));
   // const [isNextX,setIsNextX] = useState(true);
   //   const nextPlayer = isNextX ? 'X':'O'; // Derived value from State...
-  const isWinner = calculateWinner(gamingBoardState?.squareArr); // Derived value from  State...
+  const {isWinner, squarePos} = calculateWinner(gamingBoardState?.squareArr); // Derived value from  State...
   //   const winnerMessage = isWinner? `Winner is ${isWinner}`: `${nextPlayer}'s Turn`;
 
   const handleSquareChange = squarePosition => {
@@ -64,11 +64,13 @@ function App() {
   return (
     <>
       <div className="app">
+        <h1><spa className="text-orange">TIC</spa> <span className="text-green">TAC</span> TOE</h1>
         <StatusMessage gamingBoardState={gamingBoardState} isWinner={isWinner} />
-        <Board squareArr={gamingBoardState?.squareArr} handleSquareChange={handleSquareChange} />
+        <Board squareArr={gamingBoardState?.squareArr} handleSquareChange={handleSquareChange} squarePos={squarePos}/>
         <ResetHistory clearHistory={clearHistory} isWinner={isWinner}/>
         <h2 style={{ color: 'white', fontWeight: 'normal' }}>Current Game History</h2>
         <History history={history} moveTo={moveTo} currentMove={currentMove} />
+        <div className="bg-balls"></div>
       </div>
     </>
   )

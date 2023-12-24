@@ -1,9 +1,13 @@
 import Square from "./Square"
-const Board = ({squareArr,handleSquareChange}) => {
-    
+const Board = ({ squareArr, handleSquareChange, squarePos }) => {
     const RenderSquare = ({ pos }) => { // Nested Component...
+        const isWinningSquares = squarePos.includes(pos); // returns boolean values...
         return <>
-            <Square value={squareArr[pos]} onSquareClick={() => handleSquareChange(pos)} />
+            <Square
+                value={squareArr[pos]}
+                onSquareClick={() => handleSquareChange(pos)}
+                isWinningSquares={isWinningSquares}
+            />
         </>
     }
     return (

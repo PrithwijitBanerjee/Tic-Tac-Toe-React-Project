@@ -5,6 +5,8 @@ const StatusMessage = ({ gamingBoardState,isWinner }) => {
     const {squareArr,isNextX} = gamingBoardState; // destructing object...
     const nextPlayer = isNextX ? 'X' : 'O'; // Derived State...
     const isArrayFull = squareArr.every(item => item !== null);
+    let isWinnerClassName = isWinner === 'X' ? 'text-green' : 'text-orange';
+    let isNextXClassName = isNextX ? 'text-green' : 'text-orange';
     return (
         <>
             {
@@ -15,13 +17,13 @@ const StatusMessage = ({ gamingBoardState,isWinner }) => {
             {
                 isWinner && !isArrayFull && (<>
                     <h1 className='status-message'>Winner is: <span
-                        className={isWinner === 'X' ? 'text-green' : 'text-orange'}>{isWinner}</span></h1>
+                        className={isWinnerClassName}>{isWinner}</span></h1>
                 </>)
             }
             {
                 !isWinner && !isArrayFull && nextPlayer && (<>
                     <h1 className='status-message'>Next Player is: <span
-                        className={isNextX ? 'text-green' : 'text-orange'}>{nextPlayer}</span></h1>
+                        className={isNextXClassName}>{nextPlayer}</span></h1>
                 </>)
             }
         </>
