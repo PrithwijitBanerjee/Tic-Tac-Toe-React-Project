@@ -1,24 +1,6 @@
-import { useState } from "react"
 import Square from "./Square"
-const Board = () => {
-    const [squareArr, setSquareArr] = useState(Array(9).fill(null));
-    const [isNextX,setIsNextX] = useState(true);
-    const handleSquareChange = squarePosition => {
-        if(squareArr[squarePosition])
-        {
-            return;
-        }
-        setSquareArr(prevSquareArr => {
-            return prevSquareArr.map((index, position) => {
-                if (position === squarePosition) {
-                    return isNextX?'X':'O';
-                }
-                return index;
-            })
-        })
-
-        setIsNextX(prevNextX=> !prevNextX);
-    }
+const Board = ({squareArr,handleSquareChange}) => {
+    
     const RenderSquare = ({ pos }) => { // Nested Component...
         return <>
             <Square value={squareArr[pos]} onSquareClick={() => handleSquareChange(pos)} />
